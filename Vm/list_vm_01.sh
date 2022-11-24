@@ -19,3 +19,13 @@ az vm list -d -o table
 
 # List all the Vm's in the Subscription (all the RG)
 az vm list -g "" -o table
+
+# List all the Vm's in the subscription in the format
+# Name   OS   OSDisk
+# ----   --   ------
+az vm list -g "" --query "[].{Name:name, OS:storageProfile.osDisk.osType, OSDisk:storageProfile.osDisk.name}" -o table
+
+# List all the Vm's in the Subcription and show the RG
+# NAME   OS    RG
+# ----   --    --- 
+az vm list -g "" --query "[].{Name:name, OS:storageProfile.osDisk.osType, RG:resourceGroup}" -o table
